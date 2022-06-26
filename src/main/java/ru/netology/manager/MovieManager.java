@@ -1,12 +1,7 @@
 package ru.netology.manager;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import ru.netology.domain.Movie;
-
-@Data
 public class MovieManager {
+
     private String[] movies = new String[0];
     private int limit;
 
@@ -31,9 +26,7 @@ public class MovieManager {
         return movies;
     }
 
-
-    public String[] findLast() {
-
+    public String[] finsLast() {
         String[] ans;
         if (limit < movies.length) {
             ans = new String[limit];
@@ -45,7 +38,6 @@ public class MovieManager {
         }
         return ans;
     }
-
 }
 
 
