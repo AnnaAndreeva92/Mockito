@@ -2,43 +2,35 @@ package ru.netology.manager;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.netology.domain.Movie;
 
 public class MovieManagerTest {
-    MovieManager manager = new MovieManager();
 
-    public static void main(String[] args) {
-        String[] movies = {
-                "Bladshot",
-                "Forward",
-                "HotelBelgrad",
-                "Gentlemen",
-                "InvisibleMan",
-                "Trolls.WorldTour",
-                "NumberOne",
-                "DreamMakers",
-                "Missing",
-                "RocketScientist"
-        };
-    }
+
+    Movie first = new Movie(1, "Bladshot", "http://", "actionMovie");
+    Movie second = new Movie(2, "Forward", "http://", "cartoon");
+    Movie third = new Movie(3, "HotelBelgrad", "http://", "comedy");
+    Movie fourth = new Movie(4, "Gentlemen", "http://", "actionMovie");
+    Movie fifth = new Movie(5, "InvisibleMan", "http://", "horrors");
+    Movie sixth = new Movie(6, "Trolls.WorldTour", "http://", "cartoon");
+    Movie seventh = new Movie(7, "NumberOne", "http://", "comedy");
+    Movie eighth = new Movie(8, "DreamMakers", "http://", "animation");
+    Movie ninth = new Movie(9, "Missing", "http://", "thriller");
+    Movie tenth = new Movie(10, "RocketScientist", "http://", "drama");
+
 
     @Test
     public void addMovie() {
         MovieManager manager = new MovieManager(5);
-        manager.add("Bladshot");
-        manager.add("Forward");
-        manager.add("HotelBelgrad");
-        manager.add("Gentlemen");
-        manager.add("InvisibleMan");
-        manager.add("Trolls.WorldTour");
-        manager.add("NumberOne");
-        manager.add("DreamMakers");
-        manager.add("Missing");
-        manager.add("RocketScientist");
+        manager.add("first");
+        manager.add("second");
+        manager.add("third");
+        manager.add("fourth");
 
-        String newMovie = new String("threeСats");
-        manager.add(newMovie);
-        String[] actual = manager.finsLast();
-        String[] expected = {new String("threeСats"), "RocketScientist", "Missing", "DreamMakers", "NumberOne"};
+        Movie newMovie = new Movie(10,"threeСats","http://","cartoon" );
+        manager.add(String.valueOf(newMovie));
+        String[] actual = manager.findAll();
+        String[] expected = {"first","second","third", "fourth", String.valueOf(new Movie(10,"threeСats","http://","cartoon" ))};
         Assertions.assertArrayEquals(actual, expected);
 
     }
@@ -46,37 +38,37 @@ public class MovieManagerTest {
     @Test
     public void ListAllMoviesInTheOrderTheyWereAdded() {
         MovieManager manager = new MovieManager(10);
-        manager.add("Bladshot");
-        manager.add("Forward");
-        manager.add("HotelBelgrad");
-        manager.add("Gentlemen");
-        manager.add("InvisibleMan");
-        manager.add("Trolls.WorldTour");
-        manager.add("NumberOne");
-        manager.add("DreamMakers");
-        manager.add("Missing");
-        manager.add("RocketScientist");
+        manager.add("first");
+        manager.add("second");
+        manager.add("third");
+        manager.add("fourth");
+        manager.add("fifth");
+        manager.add("sixth");
+        manager.add("seventh");
+        manager.add("eighth");
+        manager.add("ninth");
+        manager.add("tenth");
 
         String[] actual = manager.findAll();
-        String[] expected = {"Bladshot", "Forward", "HotelBelgrad", "Gentlemen", "InvisibleMan", "Trolls.WorldTour", "NumberOne", "DreamMakers", "Missing", "RocketScientist"};
+        String[] expected = {"first","second","third","fourth","fifth","sixth","seventh","eighth","ninth","tenth"};
         Assertions.assertArrayEquals(actual, expected);
     }
 
     @Test
     public void DisplayingTheLatestAddedMoviesInReverseOrder() {
         MovieManager manager = new MovieManager(10);
-        manager.add("Bladshot");
-        manager.add("Forward");
-        manager.add("HotelBelgrad");
-        manager.add("Gentlemen");
-        manager.add("InvisibleMan");
-        manager.add("Trolls.WorldTour");
-        manager.add("NumberOne");
-        manager.add("DreamMakers");
-        manager.add("Missing");
-        manager.add("RocketScientist");
+        manager.add("first");
+        manager.add("second");
+        manager.add("third");
+        manager.add("fourth");
+        manager.add("fifth");
+        manager.add("sixth");
+        manager.add("seventh");
+        manager.add("eighth");
+        manager.add("ninth");
+        manager.add("tenth");
         String[] actual = manager.finsLast();
-        String[] expected = {"RocketScientist", "Missing", "DreamMakers", "NumberOne", "Trolls.WorldTour", "InvisibleMan", "Gentlemen", "HotelBelgrad", "Forward", "Bladshot"};
+        String[] expected = {"tenth","ninth","eighth","seventh","sixth","fifth","fourth","third","second","first"};
         Assertions.assertArrayEquals(actual, expected);
     }
 }
