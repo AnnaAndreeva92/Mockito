@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Movie;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
 public class MovieManagerTest {
 
 
@@ -31,7 +33,7 @@ public class MovieManagerTest {
         manager.add(String.valueOf(newMovie));
         String[] actual = manager.findAll();
         String[] expected = {"first","second","third", "fourth", String.valueOf(new Movie(10,"threeСats","http://","cartoon" ))};
-        Assertions.assertArrayEquals(actual, expected);
+        assertArrayEquals(actual, expected);
 
     }
 
@@ -51,7 +53,7 @@ public class MovieManagerTest {
 
         String[] actual = manager.findAll();
         String[] expected = {"first","second","third","fourth","fifth","sixth","seventh","eighth","ninth","tenth"};
-        Assertions.assertArrayEquals(actual, expected);
+        assertArrayEquals(actual, expected);
     }
 
     @Test
@@ -69,7 +71,32 @@ public class MovieManagerTest {
         manager.add("tenth");
         String[] actual = manager.finsLast();
         String[] expected = {"tenth","ninth","eighth","seventh","sixth","fifth","fourth","third","second","first"};
-        Assertions.assertArrayEquals(actual, expected);
+        assertArrayEquals(actual, expected);
+    }
+    @Test
+    void mustShowNothing() {
+        MovieManager manager = new MovieManager(0);
+        String[] actual = manager.finsLast();
+        String[] expected = new String[0];
+        assertArrayEquals(expected, actual);
+    }
+    @Test
+    void mustShowOverMax() {
+        MovieManager manager = new MovieManager(11);
+        manager.add("first");
+        manager.add("second");
+        manager.add("third");
+        manager.add("fourth");
+        manager.add("fifth");
+        manager.add("sixth");
+        manager.add("seventh");
+        manager.add("eighth");
+        manager.add("ninth");
+        manager.add("tenth");
+        String[] expected = {"tenth","ninth","eighth","seventh","sixth","fifth","fourth","third","second","first"};
+        String[] actual = manager.finsLast();
+        assertArrayEquals(expected, actual);
+
     }
 }
 
