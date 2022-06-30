@@ -12,6 +12,7 @@ import ru.netology.domain.PurchaseItem;
 import ru.netology.manager.CartManager;
 import ru.netology.repository.CartRepository;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -47,15 +48,24 @@ public class CartManagerTestNonEmpty {
     }
 
     @Test
-    public void test() {
+    public void deletionById () {
         PurchaseItem[] returned = new PurchaseItem[]{first,second,third,fourth,fifth,sixth,seventh,eighth,ninth,tenth};
         doReturn(returned).when(repository).findAll();
         manager.removeById(4);
         PurchaseItem[] expected = {tenth, ninth, eighth, seventh, sixth, fifth, third, second, first};
         PurchaseItem[] actual = manager.getAll();
-        Assertions.assertArrayEquals(expected, actual);
+        assertArrayEquals(expected, actual);
 
         verify(repository).findAll();
+    }
+    @Test
+    public void showAll() {
+        PurchaseItem[] returned = new PurchaseItem[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth};
+        doReturn(returned).when(repository).findAll();
+        PurchaseItem[] expected = new PurchaseItem[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth};
+        PurchaseItem[] actual = manager.showAll();
+        assertArrayEquals(expected, actual);
+
     }
 }
 

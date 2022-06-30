@@ -29,4 +29,8 @@ public class CartManager {
         repository.removeById(id);
     }
 
+    public PurchaseItem[] showAll() {
+        return repository.findAll();
+    }
+
 }
