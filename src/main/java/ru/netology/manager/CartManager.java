@@ -1,6 +1,6 @@
 package ru.netology.manager;
 
-import ru.netology.domain.PurchaseItem;
+import ru.netology.domain.Movie;
 import ru.netology.repository.CartRepository;
 
 public class CartManager {
@@ -11,26 +11,28 @@ public class CartManager {
         this.repository = repository;
     }
 
-    public void add(PurchaseItem item) {
+    public void add(Movie film) {
 
-        repository.save(item);
+        repository.save(film);
     }
 
-    public PurchaseItem[] getAll() {
-        PurchaseItem[] items = repository.findAll();
-        PurchaseItem[] result = new PurchaseItem[items.length];
+    public Movie[] getAll() {
+        Movie[] films = repository.findAll();
+        Movie[] result = new Movie[films.length];
         for (int i = 0; i < result.length; i++) {
-            int index = items.length - i - 1;
-            result[i] = items[index];
+            int index = films.length - i - 1;
+            result[i] = films[index];
         }
         return result;
-}
+    }
+
     public void removeById(int id) {
         repository.removeById(id);
     }
 
-    public PurchaseItem[] showAll() {
+    public Movie[] showAll() {
         return repository.findAll();
     }
+
 
 }
